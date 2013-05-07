@@ -10,14 +10,16 @@ Get the code. The code is waiting to be forked on [github](https://github.com/ne
 Load the sample DB locally:
 
     rake db:create
-    pg_restore --verbose --clean --no-acl --no-owner -h localhost -U $USER -d newrelic-ruby-kata_development public/sample-data.dump`
+    pg_restore --verbose --clean --no-acl --no-owner -h localhost -U $USER -d newrelic-ruby-kata_development public/sample-data.dump
 
 Step 2
 -------
 Deploy your app to Heroku and load the database there
 
     heroku apps:create
-    heroky addons:add pgbackups:plus newrelic:standard memcache:5mb
+    heroku addons:add pgbackups:plus
+    heroku addons:add newrelic:standard
+    heroku addons:add memcache:5mb
     heroku pgbackups:restore DATABASE 'http://newrelic-ruby-kata.herokuapp.com/sample-data.dump'
 
 
